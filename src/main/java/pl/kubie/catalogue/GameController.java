@@ -39,7 +39,6 @@ public class GameController {
     void update(UserInput userInput){
         Game old = gameRepository.findByName(userInput.gameId());
         Game newGame = userInput.update(old);
-        gameRepository.deleteByName(old.getName());
         gameRepository.save(newGame);
     }
 

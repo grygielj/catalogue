@@ -22,7 +22,8 @@ public class GameRepository {
             entityManager.getTransaction().commit();
             return game;
         }else{
-            entityManager.getTransaction().rollback();
+            entityManager.merge(game);
+            entityManager.getTransaction().commit();
             throw new EntityNotFoundException();
         }
     }
@@ -35,9 +36,10 @@ public class GameRepository {
         delete(game.getId());
     }
     public void delete(Long id){
-        TypedQuery<Game> query = entityManager.createQuery("select g from Game g where g.id = :id",Game.class);
-        query.setParameter("id",id);
-        Game game = query.getSingleResult();
+        Game game = entityManager.find(Game.class,id);
+//        TypedQuery<Game> query = entityManager.createQuery("select g from Game g where g.id = :id",Game.class);
+//        query.setParameter("id",id);
+//        Game game = query.getSingleResult();
         if(game == null){
             throw new EntityNotFoundException();
         }else {
