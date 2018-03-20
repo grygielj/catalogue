@@ -34,12 +34,12 @@ public class GameController {
     }
     void delete(UserInput userInput){
         String name = userInput.gameId();
-        gameRepository.delete(name);
+        gameRepository.deleteByName(name);
     }
     void update(UserInput userInput){
         Game old = gameRepository.findByName(userInput.gameId());
         Game newGame = userInput.update(old);
-        gameRepository.delete(old.getName());
+        gameRepository.deleteByName(old.getName());
         gameRepository.save(newGame);
     }
 

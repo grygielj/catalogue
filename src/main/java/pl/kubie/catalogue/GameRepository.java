@@ -15,25 +15,32 @@ public class GameRepository {
     }
 
     public Game save(Game game) {
-        Long id = game.getId();
         entityManager.getTransaction().begin();
 
-        if(entityManager.find(Game.class,id) == null){
+        if(isNew(game)){
             entityManager.persist(game);
             entityManager.getTransaction().commit();
             return game;
         }else{
             entityManager.getTransaction().rollback();
-            entityManager.getTransaction().commit();
             throw new EntityNotFoundException();
         }
     }
+    private boolean isNew(Game game){
+        return game.getId() == null;
+    }
 
-    public void delete(String name) {
+    public void deleteByName(String name) {
         Game game = findByName(name);
+        delete(game.getId());
+    }
+    public void delete(Long id){
+        TypedQuery<Game> query = entityManager.createQuery("select g from Game g where g.id = :id",Game.class);
+        query.setParameter("id",id);
+        Game game = query.getSingleResult();
         if(game == null){
             throw new EntityNotFoundException();
-        }else{
+        }else {
             entityManager.getTransaction().begin();
             entityManager.remove(game);
             entityManager.getTransaction().commit();
