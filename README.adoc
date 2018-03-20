@@ -1,0 +1,21 @@
+= Catalogue
+
+== Wymagania
+
+Tematem projektu jest aplikacja do katalogowania i oceny.
+Oceniać można np. filmy, gry komputerowe, książki, produkty.
+Aplikacja powinna umożliwiać:
+
+. Dodawanie nowych przedmiotów
+. Edytowanie danych
+. Usuwanie przedmiotów
+. Wyszukiwanie przedmiotów według kryteriów:
+.. nazwa
+.. średnia ocena
+.. data dodania
+. Dodawanie komentarzy i ocen
+
+W pierwszej kolejności powinno zostać zaimplementowane katalogowanie
+z własną bazą danych w pamięci.
+
+Punktem wejścia do aplikacji jest klasa ConsoleApp.
