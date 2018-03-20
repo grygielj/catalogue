@@ -8,7 +8,7 @@ public class Game {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String name;
     private double rate;
     private String type;
@@ -16,7 +16,10 @@ public class Game {
     private LocalDate date;
 
 
-    public Game(String name, String type,String comment, double rate) {
+    public Game() {
+    }
+
+    public Game(String name, String type, String comment, double rate) {
         this.name = name;
         this.type = type;
         this.rate = rate;
@@ -24,7 +27,7 @@ public class Game {
         this.comment = comment;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

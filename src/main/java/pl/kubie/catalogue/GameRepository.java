@@ -15,7 +15,7 @@ public class GameRepository {
     }
 
     public Game save(Game game) {
-        long id = game.getId();
+        Long id = game.getId();
         entityManager.getTransaction().begin();
 
         if(entityManager.find(Game.class,id) == null){
@@ -23,6 +23,7 @@ public class GameRepository {
             entityManager.getTransaction().commit();
             return game;
         }else{
+            entityManager.getTransaction().rollback();
             entityManager.getTransaction().commit();
             throw new EntityNotFoundException();
         }
